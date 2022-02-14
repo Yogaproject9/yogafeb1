@@ -1,0 +1,62 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/userupdate.css' %}">
+<link rel="stylesheet" href="{% static 'css/camera.css' %}">
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="box">
+     <a href="#popup1">
+        <img src="{{user.profile.profile_image.url}}" height="50px" width="50px"><br>
+
+     </a>
+      
+    </div>
+        <!--<form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{profile_form | crispy}}
+            <button type="submit" class="btn btn-success btn-block">update</button>
+        </form>-->
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+		        <div class="content">
+                    <img src="{{user.profile.profile_image.url}}" height="150px" width="150px"><br>
+
+                  {{ form.non_field_errors }}
+                     <form method="POST" enctype="multipart/form-data">
+                           {% csrf_token %}
+                           
+                       
+                               {{ profile_form.profile_image }}<br>
+                           
+                           <button type="submit" class="btn btn-success btn-block">update</button>
+
+                        </form>
+                </div> 
+            </div>       
+            
+        </div> 
+    
+   
+   
+    <div> 
+        <button onclick="startCall()">Start session</button>
+    </div>
+    <div id="video-call-div">
+        <video id="local-video" autoplay></video>
+    </div>
+    <script src="{% static 'js/camera.js' %}"></script>
+</body>
+
+
